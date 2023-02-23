@@ -1,0 +1,9 @@
+# webservise dependensies ------------------------------------------------------
+fastapi
+httpx
+pytest
+python-multipart
+uvicorn
+
+# image processing dependensies ------------------------------------------------
+Pillow

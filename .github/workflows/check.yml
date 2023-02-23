@@ -19,7 +19,7 @@ jobs:
 
     # Run checks and tests
 
-    - name: Checks
+    - name: Checks and tests
       run: make check
 
     - name: Run mdl for check markdown format

@@ -21,9 +21,10 @@ def read_poster(x, y, z, facet):
             return f.read()
 
 
-def read_poster_image(x, y, z, facet, poster_res):
-    data = read_poster(x, y, z, facet)
-    img = bytes2image(data).resize((poster_res, poster_res))
+def read_poster_image(x, y, z, facet, poster_res: int | None = None):
+    img = bytes2image(read_poster(x, y, z, facet))
+    if poster_res is not None:
+        img = img.resize((poster_res, poster_res))
     img = add_coordinate_to_poster(img, x, y, z)
     return img
 
@@ -96,9 +97,9 @@ def hposter_image(x1, y1, z1, x2, y2, z2, facet, poster_res) -> Image.Image:
     responses={200: {"content": {"image/png": {}}}},
     response_class=FileResponse,
 )
-def poster(x: int, y: int, z: int, facet: Facet, poster_res=256):
-    img = read_poster(x, y, z, facet)
-    return Response(content=img, media_type="image/png")
+def poster(x: int, y: int, z: int, facet: Facet, poster_res: int | None = None):
+    img = read_poster_image(x, y, z, facet, poster_res)
+    return Response(content=image2bytes(img), media_type="image/png")
 
 
 @app.get(

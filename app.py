@@ -44,7 +44,7 @@ def image2bytes(img):
         return output.getvalue()
 
 
-def hposter_image(x1, y1, z1, x2, y2, z2, facet, poster_res) -> Image:
+def hposter_image(x1, y1, z1, x2, y2, z2, facet, poster_res) -> Image.Image:
     """create new image from several posters as a tile"""
     assert x1 <= x2 and y1 <= y2 and z1 <= z2, "x1 <= x2 and y1 <= y2 and z1 <= z2"
     match facet:
@@ -85,6 +85,7 @@ def hposter_image(x1, y1, z1, x2, y2, z2, facet, poster_res) -> Image:
                         poster, (poster_res * (x - x1), poster_res * (y2 - y))
                     )
             return hposter
+    raise ValueError(f"Invalid facet {facet}")
 
 
 # Routes
@@ -96,7 +97,7 @@ def hposter_image(x1, y1, z1, x2, y2, z2, facet, poster_res) -> Image:
     response_class=FileResponse,
 )
 def poster(x: int, y: int, z: int, facet: Facet, poster_res=256):
-    img = read_poster(x, y, z, facet, poster_res)
+    img = read_poster(x, y, z, facet)
     return Response(content=img, media_type="image/png")
 
 

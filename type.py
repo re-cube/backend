@@ -3,7 +3,8 @@ from enum import Enum
 
 class Facet(Enum):
     """
-                Back
+    ```text
+                  Back
               +--------+     z ^   y
              /        /|       |  /
             /        / |       | /
@@ -17,6 +18,7 @@ class Facet(Enum):
          |        |/
          +--------+
            Bottom
+    ```
     """
 
     FRONT = "front"

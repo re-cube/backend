@@ -9,7 +9,7 @@ reformat:
 	black .
 	isort .
 
-check: lint
+check: lint api_doc_check
 	pytest -v
 	black --check .
 	isort --check-only .
@@ -17,6 +17,10 @@ check: lint
 lint:
 	flake8
 	pyright .
+
+api_doc_check: api_doc
+	# check if the docs/openapi.yaml is up to date
+	git diff --exit-code docs/openapi.yaml
 
 api_doc:
 	uvicorn app:app --host 0.0.0.0 --port 8000 &

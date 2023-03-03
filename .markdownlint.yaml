@@ -1,0 +1,5 @@
+MD013: false # Line length
+MD007: # Unordered list indentation
+  indent: 4
+MD051: false # Link fragments should be valid
+MD024: false # for journal file we need to repeat headers
